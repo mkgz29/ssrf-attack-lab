@@ -7,6 +7,10 @@
 
 Educational security lab demonstrating a vulnerable Node.js API affected by SSRF.
 
+<p align="center">
+  <img src="./cyberlab_architecture.svg" width="900">
+</p>
+
 ## Goals
 
 - Demonstrate reconnaissance techniques
