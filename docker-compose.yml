@@ -1,0 +1,73 @@
+version: '3.8'
+services:
+
+  api-gateway:
+    build: ./services/api-gateway
+    container_name: cyberlab_gateway
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - MONGO_URI=mongodb://mongodb:27017/cyberlab
+      - JWT_SECRET=super_secret_key_123
+      - NODE_ENV=development
+      - INTERNAL_API_URL=http://internal-api:4000
+    networks:
+      - dmz
+      - internal
+    depends_on:
+      - mongodb
+      - siem-logger
+
+  internal-api:
+    build: ./services/internal-api
+    container_name: cyberlab_internal
+    environment:
+      - PORT=4000
+      - MONGO_URI=mongodb://mongodb:27017/cyberlab
+      - JWT_SECRET=super_secret_key_123
+      - DB_ADMIN_PASS=password123
+    networks:
+      - internal
+    depends_on:
+      - mongodb
+
+  mongodb:
+    image: mongo:6
+    container_name: cyberlab_mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - internal
+
+  siem-logger:
+    build: ./services/siem-logger
+    container_name: cyberlab_siem
+    ports:
+      - "6000:6000"
+    volumes:
+      - ./logs:/app/logs
+    networks:
+      - dmz
+      - internal
+
+  defender-dashboard:
+    build: ./services/defender-dashboard
+    container_name: cyberlab_dashboard
+    ports:
+      - "5000:5000"
+    environment:
+      - SIEM_URL=http://siem-logger:6000
+    networks:
+      - dmz
+
+networks:
+  dmz:
+    driver: bridge
+  internal:
+    driver: bridge
+
+volumes:
+  mongo_data:
