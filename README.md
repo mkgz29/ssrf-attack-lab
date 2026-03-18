@@ -24,4 +24,13 @@ Educational security lab demonstrating a vulnerable Node.js API affected by SSRF
 
 ## Status
 
-🚧 Work in progress
+| Component | Status |
+|-----------|--------|
+| Lab infrastructure (Docker Compose) | ✅ Complete |
+| API Gateway — vulnerable service | ✅ Complete |
+| Internal API — no-auth service | ✅ Complete |
+| Attack scripts 1–4 | ✅ Complete |
+| Attack scripts 5–6 | 🔄 In progress |
+| SIEM Logger + detectors | 🔄 In progress |
+| Defender Dashboard | 🔄 In progress |
+| Defense patches | 🔄 In progress |
