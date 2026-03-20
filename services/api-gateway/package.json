@@ -1,12 +1,21 @@
 {
-  "name": "api-gateway",
+  "name": "cyberlab-api-gateway",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Vulnerable API Gateway - CyberLab Enterprise",
+  "main": "src/app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^8.0.0",
+    "jsonwebtoken": "^9.0.2",
+    "bcryptjs": "^2.4.3",
+    "morgan": "^1.10.0",
+    "axios": "^1.6.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
 }
