@@ -1,6 +1,18 @@
 # SSRF Attack Lab
 
+![MITRE ATT&CK](https://img.shields.io/badge/MITRE_ATT%26CK-Security-red?style=for-the-badge)
+![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+![Security Lab](https://img.shields.io/badge/Security-Lab-black?style=for-the-badge)
+
 Educational security lab demonstrating a vulnerable Node.js API affected by SSRF.
+
+## Architecture
+
+<p align="center">
+  <img src="./cyberlab_architecture.svg" width="900">
+</p>
+
 
 ## Goals
 
@@ -10,6 +22,17 @@ Educational security lab demonstrating a vulnerable Node.js API affected by SSRF
 - Map the attack chain to MITRE ATT&CK
 - Implement mitigation strategies
 
-## Status
+## Attack Chain — MITRE ATT&CK Mapping
 
-🚧 Work in progress
+| Step | Technique ID | Tactic | Vulnerability | Detection Rule |
+|------|-------------|--------|---------------|----------------|
+| 1 | T1595 / T1592 | Reconnaissance | Debug endpoint exposed in production | Alert on `/api/debug` access |
+| 2 | T1190 / T1110 | Initial Access | NoSQL Injection on login endpoint | Block `$gt`, `$regex` in body |
+| 3 | T1090.001 | Lateral Movement | SSRF via URL import to internal network | Reject RFC 1918 IP ranges |
+| 4 | T1552.001 | Credential Access | `process.env` leaked via internal API | Alert on `/admin/config` access |
+| 5 | T1078 / T1136 | Persistence | Forged JWT + backdoor admin account | Audit log on user creation |
+| 6 | T1041 | Exfiltration | Bulk user export via compromised token | Rate limit + anomaly detection |
+
+
+## Status
+> ⚠️ Educational security lab. Work in progress.
