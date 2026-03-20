@@ -10,7 +10,7 @@ Educational security lab demonstrating a vulnerable Node.js API affected by SSRF
 ## Architecture
 
 <p align="center">
-  <img src="./cyberlab_architecture.svg" width="900">
+  <img src="./docs/cyberlab_architecture.svg" width="900">
 </p>
 
 
